@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Python para análise de dados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            padding: 30px;
+            max-width: 900px;
+            margin: auto;
+            margin-right: 250px;
+        }
+
+        h1 {
+            color: #004879;
+        }
+
+        pre {
+            background: #111;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+        }
+
+        .bloco {
+            background-color: #e9f5ff;
+            padding: 20px;
+            border-left: 5px solid #0077b6;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #aaa;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #d6eaf8;
+        }
+
+        #sidebar {
+            position: fixed;
+            top: 30px;
+            /* mesmo padding-top do body */
+            right: 30px;
+            /* mesmo padding-right do body */
+            width: 200px;
+            max-height: calc(100vh - 60px);
+            overflow-y: auto;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        #sidebar h2 {
+            font-size: 16px;
+            margin-top: 0;
+            color: #004879;
+        }
+
+        #sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        #sidebar li {
+            margin: 8px 0;
+        }
+
+        #sidebar a {
+            text-decoration: none;
+            color: #0077b6;
+            font-size: 14px;
+        }
+
+        #sidebar a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="sidebar">
+        <h2>Conteúdo</h2>
+        <ul>
+            <li><a href="#matplotlib-figuras-eixos">📐 Matplotlib: Criar Figuras e Eixos</a></li>
+            <li><a href="#grafico-linha">📈 Gráfico de Linha</a></li>
+            <li><a href="#grafico-barra">📊 Gráfico de Barra</a></li>
+            <li><a href="#histograma">📉 Histograma</a></li>
+            <li><a href="#grafico-dispersao">🔬 Gráfico de Dispersão</a></li>
+            <li><a href="#boxplot">📦 Boxplot</a></li>
+            <li><a href="#subplots-layouts">🔲 Subplots e Layouts</a></li>
+            <li><a href="#personalizacao-estilos">🎨 Personalização de Estilos</a></li>
+            <li><a href="#titulos-rotulos-anotacoes">✒️ Títulos, Rótulos e Anotações</a></li>
+            <li><a href="#grades-ticks">🗺️ Grades e Ticks</a></li>
+            <li><a href="#colormaps">🖌️ Mapas de Cor (Colormaps)</a></li>
+            <li><a href="#serie-temporal">🕰️ Gráfico de Série Temporal</a></li>
+            <li><a href="#salvar-figuras">💾 Salvar Figuras</a></li>
+            <li><a href="#estilos-predefinidos">🎨 Estilos Pré-definidos</a></li>
+            <li><a href="#animacoes-simples">🎞️ Animações Simples</a></li>
+            <li><a href="#customizacao-avancada">🔧 Customização Avançada</a></li>
+        </ul>
+    </nav>
+
+    <h1 id="matplotlib-figuras-eixos">📐 Matplotlib: Criar Figuras e Eixos</h1>
+
+    <h2>🐍 Exemplo Python</h2>
+    <pre><code>import matplotlib.pyplot as plt
+
+# 1. Criar figura e eixos com tamanho e resolução personalizados
+fig, ax = plt.subplots(figsize=(10, 6), dpi=100)
+
+# 2. Exemplo de plot
+x = [1, 2, 3, 4, 5]
+y = [2, 3, 5, 7, 11]
+ax.plot(x, y, marker='o')
+
+# 3. Rótulos e título
+ax.set_title('Exemplo de Gráfico')
+ax.set_xlabel('Eixo X')
+ax.set_ylabel('Eixo Y')
+
+# 4. Exibir
+plt.show()
+</code></pre>
+
+    <div class="bloco">
+        <h3>🧠 Para que serve?</h3>
+        <p>Permite criar o canvas de desenho com dimensões (em polegadas) e qualidade (dpi) controladas, garantindo
+            figuras consistentes em relatórios e apresentações.</p>
+    </div>
+
+    <div class="bloco">
+        <h3>🔍 Explicação passo a passo</h3>
+        <ul>
+            <li><strong>plt.subplots(figsize=(10, 6))</strong>: define largura=10" e altura=6" da figura.</li>
+            <li><strong>dpi=100</strong>: especifica 100 pontos por polegada, ajustando a resolução.</li>
+            <li><strong>fig, ax</strong>: retorna objetos Figure e Axes para personalizar completamente o plot.</li>
+            <li><strong>ax.plot(x, y)</strong>: desenha a curva no eixo.</li>
+            <li><strong>ax.set_title/xlabel/ylabel</strong>: adiciona texto descritivo ao gráfico.</li>
+            <li><strong>plt.show()</strong>: apresenta a figura na tela ou em notebooks.</li>
+        </ul>
+    </div>
+
+    <div class="bloco">
+        <h3>🧾 Exemplo de Saída</h3>
+        <p>Uma figura de 10×6" com resolução 100 dpi contendo um gráfico de linha simples, pontos nos valores e rótulos
+            claros nos eixos.</p>
+    </div>
+
+    <h1 id="grafico-linha">📈 Gráfico de Linha</h1>
+    <h2>🐍 Exemplo Python</h2>
+    <pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(10, 6), dpi=100)
+ax.plot(df['data'], df['vendas'], marker='o', linestyle='-')
+ax.set_title('Vendas ao Longo do Tempo')
+ax.set_xlabel('Data')
+ax.set_ylabel('Vendas')
+plt.show()
+</code></pre>
+
+    <div class="bloco">
+        <h3>🧠 Para que serve?</h3>
+        <p>Exibe tendências ao longo do tempo, ideal para séries temporais e análise de evolução de métricas.</p>
+    </div>
+
+    <div class="bloco">
+        <h3>🔍 Explicação passo a passo</h3>
+        <ul>
+            <li><strong>fig, ax = plt.subplots(...)</strong>: cria a figura e o eixo de desenho.</li>
+            <li><strong>ax.plot(df['data'], df['vendas'], marker='o', linestyle='-')</strong>: plota vendas x data com
+                marcadores e linhas sólidas.</li>
+            <li><strong>ax.set_title(...)</strong>: define o título do gráfico.</li>
+            <li><strong>ax.set_xlabel/ylabel</strong>: rotula os eixos X e Y.</li>
+            <li><strong>plt.show()</strong>: renderiza a figura.</li>
+        </ul>
+    </div>
+
+    <div class="bloco">
+        <h3>🧾 Exemplo de Saída</h3>
+        <p>Gráfico de linha mostrando a evolução de vendas no tempo, com pontos destacados em cada data.</p>
+    </div>
+
+    <h1 id="grafico-barra">📊 Gráfico de Barra</h1>
+    <h2>🐍 Exemplo Python</h2>
+    <pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(10, 6), dpi=100)
+ax.bar(df['categoria'], df['valor_total'])
+ax.set_title('Venda Total por Categoria')
+ax.set_xlabel('Categoria')
+ax.set_ylabel('Valor Total')
+plt.xticks(rotation=45)
+plt.show()
+</code></pre>
+
+    <div class="bloco">
+        <h3>🧠 Para que serve?</h3>
+        <p>Compara valores discretos entre categorias, facilitando visualização de diferenças de magnitude.</p>
+    </div>
+
+    <div class="bloco">
+        <h3>🔍 Explicação passo a passo</h3>
+        <ul>
+            <li><strong>ax.bar(df['categoria'], df['valor_total'])</strong>: cria barras verticais para cada categoria.
+            </li>
+            <li><strong>plt.xticks(rotation=45)</strong>: rotaciona rótulos do eixo X para melhor leitura.</li>
+            <li><strong>ax.set_title/xlabel/ylabel</strong>: adiciona título e rótulos.</li>
+            <li><strong>plt.show()</strong>: exibe a figura.</li>
+        </ul>
+    </div>
+
+    <div class="bloco">
+        <h3>🧾 Exemplo de Saída</h3>
+        <p>Gráfico de barras com alturas proporcionais ao valor total vendido em cada categoria.</p>
+    </div>
+
+    <h1 id="histograma">📉 Histograma</h1>
+    <h2>🐍 Exemplo Python</h2>
+    <pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(10, 6), dpi=100)
+ax.hist(df['preco_unitario'], bins=20)
+ax.set_title('Distribuição de Preço Unitário')
+ax.set_xlabel('Preço Unitário')
+ax.set_ylabel('Frequência')
+plt.show()
+</code></pre>
+
+    <div class="bloco">
+        <h3>🧠 Para que serve?</h3>
+        <p>Mostra a distribuição de uma variável numérica, evidenciando concentração e dispersão de valores.</p>
+    </div>
+
+    <div class="bloco">
+        <h3>🔍 Explicação passo a passo</h3>
+        <ul>
+            <li><strong>ax.hist(..., bins=20)</strong>: agrupa valores em 20 intervalos (bins).</li>
+            <li><strong>ax.set_title/xlabel/ylabel</strong>: define título e rótulos.</li>
+            <li><strong>plt.show()</strong>: renderiza o histograma.</li>
+        </ul>
+    </div>
+
+    <div class="bloco">
+        <h3>🧾 Exemplo de Saída</h3>
+        <p>Barra vertical mostrando a frequência de preços unitários em faixas definidas.</p>
+    </div>
+
+    <h1 id="grafico-dispersao">🔬 Gráfico de Dispersão</h1>
+    <h2>🐍 Exemplo Python</h2>
+    <pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(10, 6), dpi=100)
+ax.scatter(df['quantidade'], df['valor_total'], alpha=0.7)
+ax.set_title('Quantidade vs. Valor Total')
+ax.set_xlabel('Quantidade')
+ax.set_ylabel('Valor Total')
+plt.show()
+</code></pre>
+
+    <div class="bloco">
+        <h3>🧠 Para que serve?</h3>
+        <p>Visualiza relação entre duas variáveis numéricas, ajudando a identificar correlações ou padrões.</p>
+    </div>
+
+    <div class="bloco">
+        <h3>🔍 Explicação passo a passo</h3>
+        <ul>
+            <li><strong>ax.scatter(..., alpha=0.7)</strong>: plota pontos com transparência para sobreposição.</li>
+            <li><strong>ax.set_title/xlabel/ylabel</strong>: adiciona título e rótulos.</li>
+            <li><strong>plt.show()</strong>: exibe o scatter plot.</li>
+        </ul>
+    </div>
+
+    <div class="bloco">
+        <h3>🧾 Exemplo de Saída</h3>
+        <p>Nuvem de pontos mostrando a dispersão de valor total em função da quantidade vendida.</p>
+    </div>
+
+    <h1 id="boxplot">📦 Boxplot</h1>
+    <h2>🐍 Exemplo Python</h2>
+    <pre><code>import matplotlib.pyplot as plt
+
+fig, ax = plt.subplots(figsize=(10, 6), dpi=100)
+grupos = [grupo['valor_total'] for _, grupo in df.groupby('categoria')]
+ax.boxplot(grupos)
+ax.set_xticklabels(df['categoria'].unique(), rotation=45)
+ax.set_title('Boxplot de Valor Total por Categoria')
+ax.set_ylabel('Valor Total')
+plt.show()
+</code></pre>
+
+    <div class="bloco">
+        <h3>🧠 Para que serve?</h3>
+        <p>Resume estatísticas de dispersão (mediana, quartis, outliers) por categoria de forma compacta.</p>
+    </div>
+
+    <div class="bloco">
+        <h3>🔍 Explicação passo a passo</h3>
+        <ul>
+            <li><strong>[grupo['valor_total'] for _, grupo in df.groupby('categoria')]</strong>: cria lista de séries
+                para cada categoria.</li>
+            <li><strong>ax.boxplot(grupos)</strong>: desenha boxplots lado a lado.</li>
+            <li><strong>ax.set_xticklabels(...)</strong>: rotula categorias no eixo X.</li>
+            <li><strong>ax.set_title/xlabel/ylabel</strong>: adiciona título e rótulos.</li>
+            <li><strong>plt.show()</strong>: exibe o gráfico.</li>
+        </ul>
+    </div>
+
+    <div class="bloco">
+        <h3>🧾 Exemplo de Saída</h3>
+        <p>Boxplots comparativos por categoria, mostrando mediana, quartis e potenciais outliers.</p>
+    </div>
+
+    <h1 id="subplots-layouts">🔲 Subplots e Layouts</h1>
+    <h2>🐍 Exemplo Python</h2>
+    <pre><code>import matplotlib.pyplot as plt
+
+# 1. Criar grid de subplots 2x2
+fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(12, 8), dpi=100)
+
+# 2. Plotar em cada eixo
+axes[0, 0].plot(df['data'], df['vendas'], marker='o')
+axes[0, 0].set_title('Vendas ao Longo do Tempo')
+
+axes[0, 1].hist(df['preco_unitario'], bins=20)
+axes[0, 1].set_title('Distribuição de Preço')
+
+axes[1, 0].bar(df['categoria'], df['valor_total'])
+axes[1, 0].set_title('Valor Total por Categoria')
+plt.setp(axes[1, 0].get_xticklabels(), rotation=45)
+
+axes[1, 1].scatter(df['quantidade'], df['valor_total'], alpha=0.7)
+axes[1, 1].set_title('Quantidade vs. Valor Total')
+
+# 3. Ajustar espaçamentos
+fig.tight_layout()
+
+# 4. Exibir
+plt.show()
+</code></pre>
+
+    <div class="bloco">
+        <h3>🧠 Para que serve?</h3>
+        <p>Organiza múltiplos gráficos em uma grade, permitindo comparar diferentes visualizações de dados lado a lado
+            de forma clara e consistente.</p>
+    </div>
+
+    <div class="bloco">
+        <h3>🔍 Explicação passo a passo</h3>
+        <ul>
+            <li><strong>plt.subplots(nrows=2, ncols=2, figsize=(12, 8), dpi=100)</strong>: cria uma figura com 4 eixos
+                dispostos em 2 linhas e 2 colunas, de tamanho 12×8" e 100 dpi.</li>
+            <li><strong>axes[i, j].plot/hist/bar/scatter</strong>: acessa cada Subplot (linha i, coluna j) para desenhar
+                o gráfico correspondente.</li>
+            <li><strong>axes[...].set_title(...)</strong>: define título individual para cada gráfico.</li>
+            <li><strong>plt.setp(axes[1,0].get_xticklabels(), rotation=45)</strong>: rotaciona rótulos do eixo X no
+                gráfico de barras para melhor leitura.</li>
+            <li><strong>fig.tight_layout()</strong>: ajusta automaticamente margens e espaçamentos entre subplots.</li>
+            <li><strong>plt.show()</strong>: renderiza toda a figura com a grade de gráficos.</li>
+        </ul>
+    </div>
+
+    <div class="bloco">
+        <h3>🧾 Exemplo de Saída</h3>
+        <p>Uma matriz 2×2 de gráficos: linha de séries temporais, histograma de preços, gráfico de barras por categoria
+            e scatter de quantidade vs. valor, com títulos e espaçamento bem ajustados.</p>
+    </div>
+
+    <h1 id="personalizacao-estilos">🎨 Personalização de Estilos</h1>
+    <h2>🐍 Exemplo Python</h2>
+    <pre><code>import matplotlib.pyplot as plt
+
+# 1. Criar figura e eixos
+fig, ax = plt.subplots(figsize=(10, 6), dpi=100)
+
+# 2. Dados de exemplo
+x = [1, 2, 3, 4, 5]
+y = [2, 4, 6, 8, 10]
+
+# 3. Personalização de estilo
+ax.plot(x, y, color='C1', linestyle='--', marker='s', label='Série A')
+
+# 4. Título, legenda e exibição
+ax.set_title('Linha Personalizada')
+ax.legend()
+plt.show()
+</code></pre>
+
+    <div class="bloco">
+        <h3>🧠 Para que serve?</h3>
+        <p>Permite ajustar cores, estilos de linha e formatos de marcador para diferenciar séries e reforçar a
+            comunicação visual dos dados.</p>
+    </div>
+
+    <div class="bloco">
+        <h3>🔍 Explicação passo a passo</h3>
+        <ul>
+            <li><strong>fig, ax = plt.subplots(...)</strong>: cria a figura e os eixos para plotagem.</li>
+            <li><strong>x, y</strong>: listas de coordenadas para o gráfico.</li>
+            <li><strong>color='C1'</strong>: escolhe a cor (segundo tom padrão do Matplotlib).</li>
+            <li><strong>linestyle='--'</strong>: define linha tracejada.</li>
+            <li><strong>marker='s'</strong>: usa marcador em forma de quadrado.</li>
+            <li><strong>label='Série A'</strong>: adiciona um rótulo à série para a legenda.</li>
+            <li><strong>ax.legend()</strong>: exibe a legenda no gráfico.</li>
+            <li><strong>plt.show()</strong>: renderiza a figura na saída.</li>
+        </ul>
+    </div>
+
+    <div class="bloco">
+        <h3>🧾 Exemplo de Saída</h3>
+        <p>Gráfico de linha com cor secundária, linha tracejada e marcadores quadrados, acompanhado de uma legenda
+            identificando a série.</p>
+    </div>
+
+    <h1 id="titulos-rotulos-anotacoes">✒️ Títulos, Rótulos e Anotações</h1>
+    <h2>🐍 Exemplo Python</h2>
+    <pre><code>import matplotlib.pyplot as plt
+
+# 1. Criar figura e eixos
+fig, ax = plt.subplots(figsize=(10, 6), dpi=100)
+
+# 2. Exemplo de dados
+x = [1, 2, 3, 4, 5, 6]
+y = [8000, 9500, 12000, 14000, 15000, 13000]
+
+# 3. Definir título e rótulos
+ax.set_title('Vendas Mensais')
+ax.set_xlabel('Mês')
+ax.set_ylabel('Faturamento (R$)')
+
+# 4. Anotar um ponto específico
+ax.annotate(
+    'Pico de vendas',
+    xy=(5, 15000),
+    xytext=(6, 18000),
+    arrowprops=dict(arrowstyle='->')
+)
+
+# 5. Plotar linha e exibir
+ax.plot(x, y, marker='o', linestyle='-')
+plt.show()
+</code></pre>
+
+    <div class="bloco">
+        <h3>🧠 Para que serve?</h3>
+        <p>Adiciona contexto e clareza ao gráfico, destacando pontos importantes e orientando o leitor com títulos,
+            legendas e anotações visuais.</p>
+    </div>
+
+    <div class="bloco">
+        <h3>🔍 Explicação passo a passo</h3>
+        <ul>
+            <li><strong>ax.set_title(...)</strong>: define o título principal do gráfico.</li>
+            <li><strong>ax.set_xlabel(...)/set_ylabel(...)</strong>: adiciona rótulos descritivos aos eixos X e Y.</li>
+            <li><strong>ax.annotate(...)</strong>: posiciona texto em <code>xytext</code>, aponta para <code>xy</code>
+                com seta configurada em <code>arrowprops</code>.</li>
+            <li><strong>marker='o', linestyle='-'</strong>: plota pontos e conecta com linha contínua.</li>
+            <li><strong>plt.show()</strong>: renderiza a figura final.</li>
+        </ul>
+    </div>
+
+    <div class="bloco">
+        <h3>🧾 Exemplo de Saída</h3>
+        <p>Gráfico de série temporal com título “Vendas Mensais”, rótulos nos eixos e uma seta apontando para o pico de
+            vendas em maio.</p>
+    </div>
+
+    <h1 id="grades-ticks">🗺️ Grades e Ticks</h1>
+    <h2>🐍 Exemplo Python</h2>
+    <pre><code>import matplotlib.pyplot as plt
+
+# 1. Criar figura e eixos
+fig, ax = plt.subplots(figsize=(10, 6), dpi=100)
+
+# 2. Ativar grade principal com linha pontilhada
+ax.grid(True, which='major', linestyle=':')
+
+# 3. Definir ticks no eixo X para meses
+meses = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez']
+ax.set_xticks(range(1, 13))
+ax.set_xticklabels(meses, rotation=45)
+
+# 4. Exemplo de plot
+x = range(1, 13)
+y = [8000, 9500, 12000, 14000, 15000, 13000, 16000, 17000, 15500, 14500, 13500, 12500]
+ax.plot(x, y, marker='o')
+
+# 5. Exibir
+plt.show()
+</code></pre>
+
+    <div class="bloco">
+        <h3>🧠 Para que serve?</h3>
+        <p>Melhora a legibilidade do gráfico, ajudando a guiar o olhar com linhas de grade e posicionando ticks e
+            rótulos em locais-chave.</p>
+    </div>
+
+    <div class="bloco">
+        <h3>🔍 Explicação passo a passo</h3>
+        <ul>
+            <li><strong>ax.grid(True, which='major', linestyle=':')</strong>: exibe apenas as grades principais como
+                linhas pontilhadas.</li>
+            <li><strong>ax.set_xticks(range(1,13))</strong>: define posições exatas dos ticks no eixo X.</li>
+            <li><strong>ax.set_xticklabels(meses, rotation=45)</strong>: atribui rótulos customizados para cada tick e
+                rotaciona para 45°.</li>
+            <li><strong>ax.plot(x, y, marker='o')</strong>: plota a série de dados com marcadores circulares.</li>
+            <li><strong>plt.show()</strong>: renderiza o gráfico com grades e ticks configurados.</li>
+        </ul>
+    </div>
+
+    <div class="bloco">
+        <h3>🧾 Exemplo de Saída</h3>
+        <p>Gráfico de linha com grade pontilhada, ticks para cada mês rotacionados a 45°, melhorando a leitura das
+            datas.</p>
+    </div>
+
+    <h1 id="colormaps">🖌️ Mapas de Cor (Colormaps)</h1>
+    <h2>🐍 Exemplo Python</h2>
+    <pre><code>import matplotlib.pyplot as plt
+
+# 1. Criar figura e eixos
+fig, ax = plt.subplots(figsize=(10, 6), dpi=100)
+
+# 2. Dados de exemplo
+x = df['quantidade']
+y = df['valor_total']
+
+# 3. Scatter com colormap
+sc = ax.scatter(x, y, c=df['preco_unitario'], cmap='viridis')
+fig.colorbar(sc, ax=ax, label='Preço Unitário')
+
+# 4. Título e rótulos
+ax.set_title('Quantidade vs. Valor Total com Colormap')
+ax.set_xlabel('Quantidade')
+ax.set_ylabel('Valor Total')
+
+# 5. Exibir
+plt.show()
+</code></pre>
+
+    <div class="bloco">
+        <h3>🧠 Para que serve?</h3>
+        <p>Permite mapear uma terceira dimensão de dados (aqui, <em>preço unitário</em>) usando uma escala de cores,
+            ideal para scatter plots e heatmaps que revelam padrões e densidades adicionais.</p>
+    </div>
+
+    <div class="bloco">
+        <h3>🔍 Explicação passo a passo</h3>
+        <ul>
+            <li><strong>fig, ax = plt.subplots(...)</strong>: cria a figura e os eixos para plotagem.</li>
+            <li><strong>ax.scatter(x, y, c=..., cmap='viridis')</strong>: plota pontos em (x,y) pintando cada ponto de
+                acordo com o valor de <code>preco_unitario</code> usando o colormap “viridis”.</li>
+            <li><strong>fig.colorbar(sc, ax=ax, label='Preço Unitário')</strong>: adiciona uma barra de cores ao lado
+                indicando a escala de valores.</li>
+            <li><strong>ax.set_title/xlabel/ylabel</strong>: define título e rótulos dos eixos para contextualizar o
+                gráfico.</li>
+            <li><strong>plt.show()</strong>: renderiza a figura completa.</li>
+        </ul>
+    </div>
+
+    <div class="bloco">
+        <h3>🧾 Exemplo de Saída</h3>
+        <p>Scatter plot onde cada ponto representa uma venda, colorido conforme o preço unitário, com legenda de cores
+            ao lado indicando a intensidade do valor.</p>
+    </div>
+
+    <h1 id="serie-temporal">🕰️ Gráfico de Série Temporal</h1>
+    <h2>🐍 Exemplo Python</h2>
+    <pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+
+# 1. Carregar dados e converter para datetime
+df = pd.read_csv('vendas.csv')
+df['data_venda'] = pd.to_datetime(df['data_venda'], dayfirst=True)
+
+# 2. Criar figura e eixo
+fig, ax = plt.subplots(figsize=(10, 6), dpi=100)
+
+# 3. Plotar série temporal com pandas (usa matplotlib internamente)
+df.set_index('data_venda')['valor_total'].plot(ax=ax)
+
+# 4. Personalizar título e rótulos
+ax.set_title('Vendas ao Longo do Tempo')
+ax.set_xlabel('Data de Venda')
+ax.set_ylabel('Valor Total (R$)')
+
+# 5. Exibir
+plt.show()
+</code></pre>
+
+    <div class="bloco">
+        <h3>🧠 Para que serve?</h3>
+        <p>Permite visualizar a evolução de uma métrica (como faturamento) ao longo do tempo de forma rápida e com
+            formatação automática de datas.</p>
+    </div>
+
+    <div class="bloco">
+        <h3>🔍 Explicação passo a passo</h3>
+        <ul>
+            <li><strong>pd.to_datetime(...)</strong>: transforma a coluna de strings em objetos datetime.</li>
+            <li><strong>df.set_index('data_venda')</strong>: define a data como índice para o plot automático.</li>
+            <li><strong>['valor_total'].plot(ax=ax)</strong>: chama o método de plotagem do pandas sobre o eixo
+                matplotlib.</li>
+            <li><strong>ax.set_title/xlabel/ylabel</strong>: adiciona contexto ao gráfico com títulos e rótulos.</li>
+            <li><strong>plt.show()</strong>: renderiza a figura completa.</li>
+        </ul>
+    </div>
+
+    <div class="bloco">
+        <h3>🧾 Exemplo de Saída</h3>
+        <p>Gráfico de linha contínua mostrando o valor total de vendas por data, com o eixo X formatado para exibir
+            datas corretamente.</p>
+    </div>
+
+    <h1 id="salvar-figuras">💾 Salvar Figuras</h1>
+    <h2>🐍 Exemplo Python</h2>
+    <pre><code>import matplotlib.pyplot as plt
+
+# 1. Criar figura e eixo
+fig, ax = plt.subplots(figsize=(10, 6), dpi=100)
+ax.plot(df['data'], df['vendas'], marker='o')
+ax.set_title('Vendas Mensais')
+ax.set_xlabel('Mês')
+ax.set_ylabel('Faturamento (R$)')
+
+# 2. Salvar figura em arquivo PNG
+fig.savefig('vendas_mensais.png', bbox_inches='tight', dpi=150)
+</code></pre>
+
+    <div class="bloco">
+        <h3>🧠 Para que serve?</h3>
+        <p>Exporta a figura criada para um arquivo de imagem, permitindo incorporá-la em relatórios, apresentações ou
+            sites com controle de resolução e margens.</p>
+    </div>
+
+    <div class="bloco">
+        <h3>🔍 Explicação passo a passo</h3>
+        <ul>
+            <li><strong>fig.savefig('vendas_mensais.png')</strong>: especifica o nome e formato do arquivo de saída.
+            </li>
+            <li><strong>bbox_inches='tight'</strong>: remove espaços em branco extras ao redor da figura.</li>
+            <li><strong>dpi=150</strong>: define a resolução em 150 pontos por polegada, gerando imagem mais nítida.
+            </li>
+        </ul>
+    </div>
+
+    <div class="bloco">
+        <h3>🧾 Exemplo de Saída</h3>
+        <p>Arquivo <code>vendas_mensais.png</code> gerado em alta resolução, com as margens ajustadas ao conteúdo do
+            gráfico.</p>
+    </div>
+
+    <h1 id="estilos-predefinidos">🎨 Estilos Pré-definidos</h1>
+    <h2>🐍 Exemplo Python</h2>
+    <pre><code>import matplotlib.pyplot as plt
+
+# 1. Escolher tema global
+plt.style.use('seaborn-darkgrid')  # ou 'ggplot', 'bmh', 'fivethirtyeight', etc.
+
+# 2. Criar figura e eixos com o tema aplicado
+fig, ax = plt.subplots(figsize=(10, 6), dpi=100)
+x = [1, 2, 3, 4, 5]
+y = [2, 3, 5, 7, 11]
+ax.plot(x, y, marker='o')
+ax.set_title('Gráfico com Estilo Seaborn Darkgrid')
+ax.set_xlabel('Eixo X')
+ax.set_ylabel('Eixo Y')
+
+# 3. Exibir
+plt.show()
+</code></pre>
+
+    <div class="bloco">
+        <h3>🧠 Para que serve?</h3>
+        <p>Aplica um tema visual consistente a todos os gráficos, alterando cores, grades e estilos de linha de forma
+            uniforme para uma apresentação mais profissional.</p>
+    </div>
+
+    <div class="bloco">
+        <h3>🔍 Explicação passo a passo</h3>
+        <ul>
+            <li><strong>plt.style.use('seaborn-darkgrid')</strong>: define o estilo global antes de qualquer plotagem.
+            </li>
+            <li><strong>'seaborn-darkgrid'</strong>: estilo com fundo escuro e grades claras; outras opções incluem
+                'ggplot', 'bmh', 'fivethirtyeight'.</li>
+            <li>Após configurar o estilo, <strong>fig, ax = plt.subplots(...)</strong> cria a figura já estilizada.</li>
+            <li>Os comandos de plotagem (<code>ax.plot</code>, <code>ax.set_title</code>, etc.) usam automaticamente as
+                cores e fontes do tema.</li>
+            <li><strong>plt.show()</strong>: renderiza a figura com o tema aplicado.</li>
+        </ul>
+    </div>
+
+    <div class="bloco">
+        <h3>🧾 Exemplo de Saída</h3>
+        <p>Gráfico de linha com o estilo “seaborn-darkgrid”, exibindo background cinza escuro e grades pontilhadas
+            claras.</p>
+    </div>
+
+    <h1 id="animacoes-simples">🎞️ Animações Simples</h1>
+    <h2>🐍 Exemplo Python</h2>
+    <pre><code>from matplotlib.animation import FuncAnimation
+import matplotlib.pyplot as plt
+import numpy as np
+
+# 1. Criar figura e linha vazia
+fig, ax = plt.subplots()
+line, = ax.plot([], [], lw=2)
+
+# 2. Função de inicialização
+def init():
+    ax.set_xlim(0, 10)
+    ax.set_ylim(0, 100)
+    return line,
+
+# 3. Função de atualização por frame
+def update(frame):
+    x = np.linspace(0, 10, 100)
+    y = np.sin(x + frame/10) * 50 + 50
+    line.set_data(x, y)
+    return line,
+
+# 4. Criar animação
+anim = FuncAnimation(
+    fig, update, init_func=init,
+    frames=100, interval=50
+)
+
+# 5. Salvar como GIF
+anim.save('animacao.gif', writer='imagemagick')
+</code></pre>
+
+    <div class="bloco">
+        <h3>🧠 Para que serve?</h3>
+        <p>Permite criar animações de gráficos, ideal para visualizar a evolução dinâmica de dados ao longo do tempo ou
+            demonstrar comportamentos periódicos.</p>
+    </div>
+
+    <div class="bloco">
+        <h3>🔍 Explicação passo a passo</h3>
+        <ul>
+            <li><strong>FuncAnimation</strong>: gera a animação, chamando <code>update</code> para cada frame e usando
+                <code>init</code> para configurar os eixos inicialmente.
+            </li>
+            <li><strong>init()</strong>: define limites do eixo X (0–10) e Y (0–100) antes da primeira atualização.</li>
+            <li><strong>update(frame)</strong>: recalcula os dados de <code>x</code> e <code>y</code> para cada quadro,
+                criando um efeito de onda senoidal em movimento.</li>
+            <li><strong>frames=100, interval=50</strong>: especifica 100 quadros com intervalo de 50 ms entre eles,
+                controlando a duração e a fluidez.</li>
+            <li><strong>anim.save(...)</strong>: exporta a animação para um arquivo GIF usando o writer ImageMagick.
+            </li>
+        </ul>
+    </div>
+
+    <div class="bloco">
+        <h3>🧾 Exemplo de Saída</h3>
+        <p>Arquivo <code>animacao.gif</code> mostrando uma onda senoidal animada que oscila entre 0 e 100 no eixo
+            vertical.</p>
+    </div>
+
+    <h1 id="customizacao-avancada">🔧 Customização Avançada</h1>
+    <h2>🐍 Exemplo Python</h2>
+    <pre><code>import matplotlib.pyplot as plt
+from mpl_toolkits.axes_grid1.inset_locator import inset_axes
+from matplotlib.patches import ConnectionPatch
+import matplotlib.gridspec as gridspec
+import numpy as np
+
+# Dados de exemplo
+x = np.linspace(0, 10, 100)
+y1 = np.sin(x)
+y2 = np.cos(x)
+
+# 1. Eixos secundários
+fig, ax1 = plt.subplots(figsize=(10, 6), dpi=100)
+ax1.plot(x, y1, color='b', label='Seno')
+ax1.set_xlabel('X')
+ax1.set_ylabel('sin(x)', color='b')
+ax1.tick_params(axis='y', labelcolor='b')
+ax2 = ax1.twinx()
+ax2.plot(x, y2, color='r', linestyle='--', label='Cosseno')
+ax2.set_ylabel('cos(x)', color='r')
+ax2.tick_params(axis='y', labelcolor='r')
+
+# 2. Inset plot (zoom no seno)
+axins = inset_axes(ax1, width="30%", height="30%", loc='upper right')
+axins.plot(x, y1, color='green')
+axins.set_title('Zoom Seno')
+
+# 3. Broken axis com gridspec
+fig2 = plt.figure(figsize=(6, 4), dpi=100)
+gs = gridspec.GridSpec(2, 1, height_ratios=[1, 2])
+ax_top = fig2.add_subplot(gs[0])
+ax_bottom = fig2.add_subplot(gs[1], sharex=ax_top)
+ax_top.plot(x, y1)
+ax_bottom.plot(x, y1)
+ax_top.spines['bottom'].set_visible(False)
+ax_bottom.spines['top'].set_visible(False)
+ax_top.tick_params(labelbottom=False)
+con = ConnectionPatch(
+    xyA=(0,1), xyB=(0,0),
+    coordsA="axes fraction", coordsB="axes fraction",
+    axesA=ax_top, axesB=ax_bottom,
+    arrowstyle='-'
+)
+ax_bottom.add_artist(con)
+
+# 4. Textos em LaTeX
+plt.rc('text', usetex=True)
+fig3, ax3 = plt.subplots(figsize=(6, 3), dpi=100)
+ax3.set_title(r'$\alpha > \beta$', fontsize=14)
+ax3.plot(x, y1, label=r'$\sin(x)$')
+ax3.legend()
+
+plt.show()
+</code></pre>
+
+    <div class="bloco">
+        <h3>🧠 Para que serve?</h3>
+        <p>Combina técnicas avançadas para enriquecer visualizações: eixos duplos, zoom embutido, eixos quebrados,
+            layouts flexíveis e textos matemáticos em LaTeX.</p>
+    </div>
+
+    <div class="bloco">
+        <h3>🔍 Explicação passo a passo</h3>
+        <ul>
+            <li><strong>ax1.twinx()</strong>: cria um segundo eixo Y compartilhando o X, útil para comparar séries com
+                escalas diferentes.</li>
+            <li><strong>inset_axes(...)</strong>: adiciona um gráfico menor dentro do principal, perfeito para destacar
+                regiões de interesse.</li>
+            <li><strong>gridspec.GridSpec</strong>: configura uma grade para criar “eixos quebrados” com proporções
+                customizadas.</li>
+            <li><strong>ConnectionPatch</strong>: desenha conexões visuais entre eixos quebrados, mantendo a
+                continuidade de dados.</li>
+            <li><strong>plt.rc('text', usetex=True)</strong>: habilita o uso de sintaxe LaTeX para títulos, rótulos e
+                anotações matemáticas.</li>
+        </ul>
+    </div>
+
+    <div class="bloco">
+        <h3>🧾 Exemplo de Saída</h3>
+        <p>Três figuras: (1) gráfico com eixos duplos e inset de zoom, (2) gráfico com eixo Y quebrado para enfatizar
+            diferentes regimes, (3) plotagem com título em LaTeX e legenda matemática.</p>
+    </div>
+</body>
+
+</html>
